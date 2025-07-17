@@ -1,0 +1,28 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/aryan-sharma-1908/E-commerce-Website#readme",
+  "bugs": {
+    "url": "https://github.com/aryan-sharma-1908/E-commerce-Website/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aryan-sharma-1908/E-commerce-Website.git"
+  },
+  "license": "ISC",
+  "author": "Aryan Sharma",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

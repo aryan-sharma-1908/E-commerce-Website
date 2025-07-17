@@ -1,0 +1,7 @@
+node_modules
+#logs 
+logs/
+
+#Environment variables
+.env.development.local
+.env.production.local
