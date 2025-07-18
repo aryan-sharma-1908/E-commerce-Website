@@ -1,15 +1,15 @@
 import express from 'express';
 import cors from 'cors';
-import connectToDatabse from './DATABASE/mongodb.js';
-import { PORT, NODE_ENV } from './config/env.js';
+import connectToDatabase from './DATABASE/mongodb.js';
+import { PORT } from './config/env.js';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
-// import authRoutes from './routes/auth.routes.js';
+import authRoutes from './Routes/auth.js'
 import { logger } from './middlewares/logEvents.js';
-import { corsOptions } from './config/corsOptions.js';
+import corsOptions from './config/corsOptions.js';
 import errorHandler from './middlewares/errorHandler.js';
 
-connectToDatabse();
+connectToDatabase();
 
 const app = express();
 
@@ -19,14 +19,26 @@ app.use(cors(corsOptions));
 // Other middleware
 app.use(logger);
 app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({limit : '10mb'}));
+app.use(express.urlencoded({ extended: true, limit : '10mb' }));
 
 app.get('/', (req, res) => {
-    res.send('We are at the entry page');
+    res.json({
+        success: true,
+        message: 'Welcome to the API',
+        version: '1.0.0'
+    });
 });
 
-// app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/auth', authRoutes);
+
+app.all('*',(req,res) => {
+    res.status(404).json({
+        success: false,
+        message: 'Route not found!',
+        path: req.originalUrl
+    })
+})
 
 // Error handling middleware
 app.use(errorHandler);
@@ -35,3 +47,4 @@ mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
+

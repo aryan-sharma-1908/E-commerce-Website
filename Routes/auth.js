@@ -1,8 +1,12 @@
 import { Router } from "express";
-import registerUser from "../controllers/register.controller";
-import loginUser from "../controllers/login.controller";
+import registerUser from "../controllers/register.controller.js";
+import loginUser from "../controllers/login.controller.js";
+import logOutUser from "../controllers/logout.controller.js"
 
-Router.post('/api/v1/auth/register',registerUser);
-Router.post('/api/v1/auth/login',loginUser);
+const router = Router();
 
-export default Router;
+router.post('/register',registerUser);
+router.post('/login',loginUser);
+router.post('/logout',logOutUser);
+
+export default router;
