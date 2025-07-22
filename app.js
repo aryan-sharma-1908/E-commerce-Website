@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/auth', authRoutes);
 
-app.all('*',(req,res) => {
+app.all('/*catchall',(req,res) => {
     res.status(404).json({
         success: false,
         message: 'Route not found!',
